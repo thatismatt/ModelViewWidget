@@ -23,7 +23,9 @@ function TodoItemView($el, model) {
 function CreateView($el, model) {
     View(this);
     var widget = new AutoSubmitTextInput();
-    widget.bind('submit', model.add);
+    widget.bind('submit', function(name) {
+        model.add(new TodoItem(name));
+    });
     $el.append(widget.$el);
 }
 

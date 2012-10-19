@@ -4,6 +4,11 @@ mvw.utils = {};
 mvw.utils.pluralize = function(name, count) {
     return count === 1 ? name : name + 's';
 };
+mvw.utils.each = function(items, callback) {
+    for (var i = 0; i < items.length; i++) {
+        callback(items[i]);
+    }
+};
 
 mvw.config = {};
 mvw.config.debug = true;
@@ -37,7 +42,7 @@ function Collection(self) {
     var each = function(userCallback, callback) {
         for (var i = 0; i < self.items.length; i++) {
             var item = self.items[i];
-            var result = userCallback.apply(self, [item, i]);
+            var result = userCallback.call(self, item, i);
             if (callback) {
                 callback(item, i, result);
             }

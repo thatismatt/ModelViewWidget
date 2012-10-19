@@ -3,20 +3,9 @@ function TodoItems(items) {
 
     CollectionModel(self);
 
-    self.items = items || [];
+    self.items = [];
 
-    self.each(function(item) {
-        item.isDone.subscribe(function(isDone) {
-            self.trigger('item-done');
-        });
-        item.bind('destroy', function(item) {
-            self.remove(item);
-            self.trigger('remove');
-        });
-    });
-
-    self.add = function(name) {
-        var item = new TodoItem(name);
+    self.add = function(item) {
         item.isDone.subscribe(function(isDone) {
             self.trigger('item-done');
         });
@@ -57,6 +46,10 @@ function TodoItems(items) {
     self.bind('remove', updateTotal);
     self.bind('remove', updateTotalCompleted);
     self.bind('item-done', updateTotalCompleted);
+
+    (function initialise() {
+        mvw.utils.each(items, self.add);
+    })();
 }
 
 function TodoItem(title, isDone) {
