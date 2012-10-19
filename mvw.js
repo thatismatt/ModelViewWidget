@@ -88,11 +88,7 @@ function Collection(self) {
     };
 }
 
-function Model(self) {
-    EventEmitter(self);
-}
-
-mvw.Observable = function(initialValue) {
+function Observable(initialValue) {
     var subscriptions = [];
     var observable = function(val) {
         if (val === undefined) {
@@ -116,6 +112,10 @@ mvw.Observable = function(initialValue) {
     return observable;
 };
 
+function Model(self) {
+    EventEmitter(self);
+}
+
 function ModelCollection(self) {
     Model(self);
     Collection(self);
@@ -138,5 +138,6 @@ mvw.ModelCollection = ModelCollection;
 mvw.View = View;
 mvw.ViewCollection = ViewCollection;
 mvw.Widget = Widget;
+mvw.Observable = Observable;
 
 })();
