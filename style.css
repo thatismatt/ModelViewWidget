@@ -1,0 +1,54 @@
+html, body {
+    padding: 0 0 10px 0;
+    margin: 0;
+    background-color: #ddd;
+}
+
+html, body, input, button {
+    font-family: Calibri, Arial, sans-serif;
+    font-size: 20px;
+}
+
+body {
+    line-height: 40px;
+}
+
+button, input {
+    line-height: 30px;
+}
+
+#wrapper {
+    width: 400px;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: #fff;
+    box-shadow: 0 0 10px 2px #999;
+}
+
+#wrapper.wide {
+    width: 600px;
+}
+
+h1 {
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+
+h2 {
+    font-size: 20px;
+    margin: 10px 0 5px 0;
+}
+
+p {
+    margin: 0;
+}
+
+input[type=checkbox] {
+    padding: 0;
+    margin: 0 5px;
+}
+
+a {
+    cursor: pointer;
+}
+

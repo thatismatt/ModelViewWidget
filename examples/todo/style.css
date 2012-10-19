@@ -1,0 +1,53 @@
+.todo-item {
+    border-bottom: 1px solid #ccc;
+}
+
+.crossed-out a {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.destroy {
+    background: url(destroy.png) no-repeat 0 0;
+    height: 20px;
+    width: 20px;
+    border: none;
+    float: right;
+    margin: 10px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.destroy:hover {
+    background-position: 0 -20px;
+}
+
+#create input {
+    width: 380px;
+    border: 1px solid #CCCCCC;
+    margin: 0 4px;
+    padding: 5px;
+}
+
+.small {
+    font-size: 80%;
+}
+
+.small button {
+    line-height: 20px;
+    font-size: 80%;
+}
+
+#total-completed {
+    float: right;
+    color: #999;
+}
+
+#notes {
+    line-height: 20px;
+}
+
+#notes ul {
+    margin: 0;
+}
+

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Model View Widget - ToDo App</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Todos</h1>
+        <div id="create"></div>
+        <div id="list"></div>
+        <div id="stats" class="small"></div>
+        <div id="actions" class="small"></div>
+        <div id="notes" class="small">
+            <h2>Usage Notes</h2>
+            <ul>
+                <li>Double click an item to edit it.</li>
+                <li>Type new items in the box below the title then press enter, or escape to cancel.</li>
+            </ul>
+            <h2>Inspiration</h2>
+            <p>
+                This example was written as a comparison with
+                <a href="http://documentcloud.github.com/backbone/examples/todos/index.html">this one</a>,
+                that's written using <a href="http://documentcloud.github.com/backbone/">Backbone.js</a>.
+            </p>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../../jquery.js"></script>
+    <script type="text/javascript" src="../../mvw.js"></script>
+    <script type="text/javascript" src="models.js"></script>
+    <script type="text/javascript" src="widgets.js"></script>
+    <script type="text/javascript" src="views.js"></script>
+    <script type="text/javascript">
+        var todoItems = new TodoItems([
+            new TodoItem('Buy eggs'),
+            new TodoItem('Buy milk', true),
+            new TodoItem('Take over the world')
+        ]);
+
+        var listView = new TodoListView($('#list'), todoItems);
+        var createView = new CreateView($('#create'), todoItems);
+        var statsView = new StatsView($('#stats'), todoItems);
+        var actionsView = new ActionsView($('#actions'), todoItems);
+    </script>
+</body>
+</html>
+
