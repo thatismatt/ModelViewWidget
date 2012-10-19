@@ -1,6 +1,6 @@
 function TodoListView($el, model) {
     var self = this;
-    ViewCollection(self);
+    mvw.ViewCollection(self);
     self.items = model.items;
     self.each(function(model) {
         new TodoItemView($el, model);
@@ -11,7 +11,7 @@ function TodoListView($el, model) {
 }
 
 function TodoItemView($el, model) {
-    View(this);
+    mvw.View(this);
     var widget = new CrossOutableItem(model.isDone, model.title);
     $el.append(widget.$el);
     model.bind('destroy', function() {
@@ -21,7 +21,7 @@ function TodoItemView($el, model) {
 }
 
 function CreateView($el, model) {
-    View(this);
+    mvw.View(this);
     var widget = new AutoSubmitTextInput();
     widget.bind('submit', function(name) {
         model.add(new TodoItem(name));
@@ -30,14 +30,14 @@ function CreateView($el, model) {
 }
 
 function StatsView($el, model) {
-    View(this);
+    mvw.View(this);
     var widget = new StatsWidget(model.total, model.totalCompleted);
     widget.bind('delete-completed', model.deleteCompleted);
     $el.append(widget.$el);
 }
 
 function ActionsView($el, model) {
-    View(this);
+    mvw.View(this);
     var widget = new ActionsWidget();
     widget.bind('mark-all', function(action) {
         var isDone = action === 'completed';

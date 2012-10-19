@@ -19,6 +19,8 @@ mvw.log = function() {
     }
 };
 
+(function() {
+
 function EventEmitter(self) {
     var events = {};
 
@@ -112,7 +114,7 @@ function Model(self) {
     };
 }
 
-function CollectionModel(self) {
+function ModelCollection(self) {
     Model(self);
     Collection(self);
 }
@@ -129,3 +131,10 @@ function Widget(self) {
     EventEmitter(self);
 }
 
+mvw.Model = Model;
+mvw.ModelCollection = ModelCollection;
+mvw.View = View;
+mvw.ViewCollection = ViewCollection;
+mvw.Widget = Widget;
+
+})();

@@ -1,7 +1,7 @@
 function TodoItems(items) {
     var self = this;
 
-    CollectionModel(self);
+    mvw.ModelCollection(self);
 
     self.items = [];
 
@@ -55,7 +55,7 @@ function TodoItems(items) {
 function TodoItem(title, isDone) {
     var self = this;
 
-    Model(self);
+    mvw.Model(self);
 
     self.isDone = self.observable(!!isDone);
     self.title = self.observable(title);

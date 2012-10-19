@@ -1,7 +1,7 @@
 function CrossOutableItem(crossedOut, text) {
     var self = this;
 
-    Widget(self);
+    mvw.Widget(self);
 
     self.$el = $('<div class="todo-item">');
 
@@ -28,7 +28,7 @@ function CrossOutableItem(crossedOut, text) {
 function AutoSubmitTextInput() {
     var self = this;
 
-    Widget(self);
+    mvw.Widget(self);
 
     self.$el = $('<form>');
     self.$el.css('display', 'inline');
@@ -104,7 +104,7 @@ function EditableText(text) {
 function StatsWidget(total, totalCompleted) {
     var self = this;
 
-    Widget(self);
+    mvw.Widget(self);
 
     self.$el = $('<div>');
 
@@ -133,7 +133,7 @@ function StatsWidget(total, totalCompleted) {
 function ActionsWidget() {
     var self = this;
 
-    Widget(self);
+    mvw.Widget(self);
 
     self.$el = $('<div>');
 
@@ -153,7 +153,7 @@ function ActionsWidget() {
 function ImageButton(cssClass) {
     var self = this;
 
-    Widget(self);
+    mvw.Widget(self);
 
     self.$el = $('<button>').addClass(cssClass);
 
