@@ -30,9 +30,9 @@ function TodoItems(items) {
         return self.count(function(model) { return model.isDone(); });
     }
 
-    self.total = self.observable(self.items.length);
+    self.total = mvw.Observable(self.items.length);
 
-    self.totalCompleted = self.observable(countTotalCompleted());
+    self.totalCompleted = mvw.Observable(countTotalCompleted());
 
     var updateTotal = function() {
         self.total(self.items.length);
@@ -57,8 +57,8 @@ function TodoItem(title, isDone) {
 
     mvw.Model(self);
 
-    self.isDone = self.observable(!!isDone);
-    self.title = self.observable(title);
+    self.isDone = mvw.Observable(!!isDone);
+    self.title = mvw.Observable(title);
 
     self.destroy = function() {
         self.trigger('destroy', self);

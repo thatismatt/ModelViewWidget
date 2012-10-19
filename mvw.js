@@ -90,29 +90,31 @@ function Collection(self) {
 
 function Model(self) {
     EventEmitter(self);
-
-    self.observable = function(initialValue) {
-        var subscriptions = [];
-        var observable = function(val) {
-            if (val === undefined) {
-                // get
-                return observable.value;
-            } else {
-                // set
-                observable.value = val;
-                for (var i = 0; i < subscriptions.length; i++) {
-                    subscriptions[i](val);
-                }
-            }
-        };
-        observable.subscribe = function(callback) {
-            subscriptions.push(callback);
-            callback(observable.value);
-        };
-        observable(initialValue);
-        return observable;
-    };
 }
+
+mvw.Observable = function(initialValue) {
+    var subscriptions = [];
+    var observable = function(val) {
+        if (val === undefined) {
+            // get
+            mvw.log('observable', 'get', observable.value);
+            return observable.value;
+        } else {
+            // set
+            mvw.log('observable', 'set', val);
+            observable.value = val;
+            for (var i = 0; i < subscriptions.length; i++) {
+                subscriptions[i](val);
+            }
+        }
+    };
+    observable.subscribe = function(callback) {
+        subscriptions.push(callback);
+        callback(observable.value);
+    };
+    observable(initialValue);
+    return observable;
+};
 
 function ModelCollection(self) {
     Model(self);
