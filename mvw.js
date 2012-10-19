@@ -25,8 +25,8 @@ function EventEmitter(self) {
     var events = {};
 
     self.trigger = function(identifier, data) {
+        mvw.log('trigger', this, arguments);
         var es = events[identifier];
-        mvw.log('trigger', this, arguments, es);
         if (es) {
             for (var i = 0; i < es.length; i++) {
                 es[i](data);
