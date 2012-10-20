@@ -53,7 +53,9 @@ $.get('mvw.js', function(raw) {
             .sections
             .map(function(s) {
                 // TODO: handle doc titles
+                //       remove comment chars
                 var doc = '<div class="doc">' + s.doc.map(render(docTemplate)).join('') + '</div>';
+                // TODO: Remove empty trailing lines from code blocks
                 var code = '<pre class="code">' + s.code.map(render(codeTemplate)).join('') + '</pre>';
                 return '<div class="section">' + doc + code + '</div>';
             });
