@@ -28,7 +28,15 @@ var codeTemplate =
         '</div>' +
     '</div>';
 
-var docTemplate = '{content} ';
+function renderDocs(result, d) {
+    var content = d.content.replace(/^\/\//, '');
+    if (d.isTitle) {
+        result += '<h3>' + content.trim().replace(/^#/, '') + '</h3>';
+    } else {
+        result += content;
+    }
+    return result;
+}
 
 $.get('mvw.js', function(raw) {
     var lines =
@@ -52,9 +60,7 @@ $.get('mvw.js', function(raw) {
             }, { isDoc: false, sections: [] })
             .sections
             .map(function(s) {
-                // TODO: handle doc titles
-                //       remove comment chars
-                var doc = '<div class="doc">' + s.doc.map(render(docTemplate)).join('') + '</div>';
+                var doc = '<div class="doc">' + s.doc.reduce(renderDocs, '') + '</div>';
                 // TODO: Remove empty trailing lines from code blocks
                 var code = '<pre class="code">' + s.code.map(render(codeTemplate)).join('') + '</pre>';
                 return '<div class="section">' + doc + code + '</div>';

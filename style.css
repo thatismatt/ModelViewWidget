@@ -81,8 +81,9 @@ pre {
     float: left;
 }
 
-.doc .title {
-    font-weight: bold;
+.doc h3 {
+    margin: 0;
+    padding: 0;
 }
 
 .number {
