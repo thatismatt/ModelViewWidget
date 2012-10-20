@@ -48,3 +48,11 @@ a {
     cursor: pointer;
 }
 
+/* Documentation */
+
+pre {
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
+    line-height: 16px;
+    font-size: 12px;
+}
+
