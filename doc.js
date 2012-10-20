@@ -1,15 +1,15 @@
 (function() {
 
-function isComment(l) {
-    return l.trim().substring(0, 2) == '//';
+function isDocumentation(l) {
+    return l.substring(0, 2) == '//';
 }
 
 function isTitle(l) {
     return l.indexOf('#') > -1;
 }
 
-function template(t) {
-    return function(_, ctx) {
+function render(t) {
+    return function(ctx) {
         var tmpl = t;
         for (var i in ctx) {
             tmpl = tmpl.replace('{' + i + '}', ctx[i])
@@ -18,8 +18,8 @@ function template(t) {
     };
 }
 
-var lineTemplate =
-    '<div class="{cls}">' +
+var codeTemplate =
+    '<div class="line">' +
         '<div class="number">' +
             '{number}' +
         '</div>' +
@@ -28,25 +28,39 @@ var lineTemplate =
         '</div>' +
     '</div>';
 
+var docTemplate = '{content} ';
+
 $.get('mvw.js', function(raw) {
     var lines =
-        $(raw.split('\n'))
-            .map(function(i, l) {
-                var cls = [];
-                if (isComment(l)) {
-                    cls.push('doc');
-                    cls.push(isTitle(l) ? 'title' : 'line');
-                }
+        raw.split('\n')
+            .map(function(l, i) {
                 return {
-                    cls: cls.join(' '),
                     content: l,
-                    number: i
+                    number: i,
+                    isDoc: isDocumentation(l),
+                    isTitle: isTitle(l)
                 };
             })
-            .map(template(lineTemplate))
-            .toArray();
-    var html = '<pre>' + lines.join('') + '</pre>';
-    $('#doc').html(html);
+            .reduce(function(agg, v) {
+                if (agg.isDoc !== v.isDoc) {
+                    var s = [];
+                    s.isDoc = v.isDoc;
+                    agg.sections.push(s)
+                    agg.isDoc = v.isDoc;
+                }
+                agg.sections[agg.sections.length - 1].push(v)
+                return agg;
+            }, { isDoc: false, sections: [] })
+            .sections
+            .map(function(s) {
+                // TODO: handle doc titles
+                var template = s.isDoc ? docTemplate : codeTemplate;
+                var tag = s.isDoc ? 'div' : 'pre';
+                return '<' + tag + ' class="' + (s.isDoc ? 'doc' : 'code') + '">' +
+                            s.map(render(template)).join('') +
+                       '</' + tag + '>';
+            });
+    $('#doc').html(lines.join(''));
 });
 
 })();

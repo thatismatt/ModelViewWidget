@@ -57,15 +57,15 @@ pre {
     color: #666;
 }
 
-pre div {
+.code .line {
     height: 16px;
 }
 
-.doc .content {
+.doc {
     color: #060;
 }
 
-.doc.title .content {
+.doc .title {
     font-weight: bold;
 }
 
