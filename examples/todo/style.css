@@ -1,3 +1,7 @@
+#wrapper {
+    width: 400px;
+}
+
 .todo-item {
     border-bottom: 1px solid #ccc;
 }
