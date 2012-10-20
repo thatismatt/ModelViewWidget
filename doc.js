@@ -12,9 +12,6 @@ $.get('mvw.js', function (raw) {
     var lines =
         $(raw.split('\n'))
             .map(function(i, l) {
-                return l.length === 0 ? ' ' : l;
-            })
-            .map(function(i, l) {
                 var type = isTitle(l) ? 'title' : 'line';
                 return isComment(l)
                     ? '<div class="doc ' + type + '">' + l + '</div>'
