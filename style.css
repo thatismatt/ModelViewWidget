@@ -18,15 +18,11 @@ button, input {
 }
 
 #wrapper {
-    width: 400px;
+    width: 600px;
     margin: 0 auto;
     padding: 25px;
     background-color: #fff;
     box-shadow: 0 0 10px 2px #999;
-}
-
-#wrapper {
-    width: 600px;
 }
 
 h1 {
