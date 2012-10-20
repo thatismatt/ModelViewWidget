@@ -26,6 +26,7 @@ mvw.log = function() {
 
 (function() {
 
+// EventEmitter
 function EventEmitter(self) {
     var events = {};
 
@@ -45,6 +46,7 @@ function EventEmitter(self) {
     };
 }
 
+// Collection
 function Collection(self) {
     var each = function(userCallback, callback) {
         for (var i = 0; i < self.items.length; i++) {
@@ -93,6 +95,7 @@ function Collection(self) {
     };
 }
 
+// Observable
 function Observable(initialValue) {
     var subscriptions = [];
     var observable = function(val) {
@@ -117,27 +120,33 @@ function Observable(initialValue) {
     return observable;
 };
 
+// Model
 function Model(self) {
     EventEmitter(self);
 }
 
+// ModelCollection
 function ModelCollection(self) {
     Model(self);
     Collection(self);
 }
 
+// View
 function View(self) {
 }
 
+// ViewCollection
 function ViewCollection(self) {
     View(self);
     Collection(self);
 }
 
+// Widget
 function Widget(self) {
     EventEmitter(self);
 }
 
+// Expose
 mvw.Model = Model;
 mvw.ModelCollection = ModelCollection;
 mvw.View = View;
