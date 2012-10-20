@@ -6,11 +6,6 @@ mvw.utils = {};
 mvw.utils.pluralize = function(name, count) {
     return count === 1 ? name : name + 's';
 };
-mvw.utils.each = function(items, callback) {
-    for (var i = 0; i < items.length; i++) {
-        callback(items[i]);
-    }
-};
 
 // # Configuration
 mvw.config = {};

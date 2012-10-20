@@ -48,7 +48,7 @@ function TodoItems(items) {
     self.bind('item-done', updateTotalCompleted);
 
     (function initialise() {
-        mvw.utils.each(items, self.add);
+        items.map(self.add);
     })();
 }
 
