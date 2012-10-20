@@ -1,5 +1,7 @@
+// # Namespace declaration
 var mvw = {};
 
+// # Utils
 mvw.utils = {};
 mvw.utils.pluralize = function(name, count) {
     return count === 1 ? name : name + 's';
@@ -10,9 +12,12 @@ mvw.utils.each = function(items, callback) {
     }
 };
 
+// # Configuration
 mvw.config = {};
+// Set debug to true to see log messages in the console
 mvw.config.debug = true;
 
+// A log function that obeys the config debug setting
 mvw.log = function() {
     if (mvw.config.debug && console && console.log) {
         console.log.apply(console, arguments);
