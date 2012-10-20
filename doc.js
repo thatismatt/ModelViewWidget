@@ -1,3 +1,4 @@
+(function() {
 
 function isComment(l) {
     return l.trim().substring(0, 2) == '//';
@@ -15,4 +16,6 @@ $.get('mvw.js', function (raw) {
         '</div></pre>';
     $('#doc').html(html);
 });
+
+})();
 
