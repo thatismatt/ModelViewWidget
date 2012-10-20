@@ -3,6 +3,7 @@ var mvw = {};
 
 // # Utils
 mvw.utils = {};
+// A simple function to pluralize string
 mvw.utils.pluralize = function(name, count) {
     return count === 1 ? name : name + 's';
 };
@@ -21,7 +22,11 @@ mvw.log = function() {
 
 (function() {
 
-// EventEmitter
+// # EventEmitter
+// Call this function on an object to give it the bind() and
+// trigger() methods. bind() is used to register a callback for
+// a particular event, trigger() is used to invoke those callbacks
+// for an event with an optional payload `data`.
 function EventEmitter(self) {
     var events = {};
 
@@ -41,9 +46,9 @@ function EventEmitter(self) {
     };
 }
 
-// Collection
+// # Collection
 function Collection(self) {
-    var each = function(userCallback, callback) {
+    self.each = function(userCallback, callback) {
         for (var i = 0; i < self.items.length; i++) {
             var item = self.items[i];
             var result = userCallback.call(self, item, i);
@@ -53,11 +58,9 @@ function Collection(self) {
         }
     };
 
-    self.each = each;
-
     self.filter = function(callback) {
         var results = [];
-        each(callback, function(item, i, result) {
+        self.each(callback, function(item, i, result) {
             if (result) {
                 results.push(item);
             }
@@ -90,7 +93,7 @@ function Collection(self) {
     };
 }
 
-// Observable
+// # Observable
 function Observable(initialValue) {
     var subscriptions = [];
     var observable = function(val) {
@@ -115,33 +118,33 @@ function Observable(initialValue) {
     return observable;
 };
 
-// Model
+// # Model
 function Model(self) {
     EventEmitter(self);
 }
 
-// ModelCollection
+// # ModelCollection
 function ModelCollection(self) {
     Model(self);
     Collection(self);
 }
 
-// View
+// # View
 function View(self) {
 }
 
-// ViewCollection
+// # ViewCollection
 function ViewCollection(self) {
     View(self);
     Collection(self);
 }
 
-// Widget
+// # Widget
 function Widget(self) {
     EventEmitter(self);
 }
 
-// Expose
+// Expose the public API
 mvw.Model = Model;
 mvw.ModelCollection = ModelCollection;
 mvw.View = View;
