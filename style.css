@@ -54,9 +54,14 @@ pre {
     font-family: Consolas, "Liberation Mono", Courier, monospace;
     line-height: 16px;
     font-size: 12px;
+    color: #666;
 }
 
-.doc-line {
-    color: #006;
+.doc {
+    color: #060;
+}
+
+.doc.title {
+    font-weight: bold;
 }
 
