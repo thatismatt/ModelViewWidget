@@ -61,11 +61,16 @@ pre div {
     height: 16px;
 }
 
-.doc {
+.doc .content {
     color: #060;
 }
 
-.doc.title {
+.doc.title .content {
     font-weight: bold;
 }
 
+.number {
+    color: #ccc;
+    float: left;
+    width: 30px;
+}

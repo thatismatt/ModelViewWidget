@@ -8,20 +8,44 @@ function isTitle(l) {
     return l.indexOf('#') > -1;
 }
 
-$.get('mvw.js', function (raw) {
+function template(t) {
+    return function(_, ctx) {
+        var tmpl = t;
+        for (var i in ctx) {
+            tmpl = tmpl.replace('{' + i + '}', ctx[i])
+        }
+        return tmpl;
+    };
+}
+
+var lineTemplate =
+    '<div class="{cls}">' +
+        '<div class="number">' +
+            '{number}' +
+        '</div>' +
+        '<div class="content">' +
+            '{content}' +
+        '</div>' +
+    '</div>';
+
+$.get('mvw.js', function(raw) {
     var lines =
         $(raw.split('\n'))
             .map(function(i, l) {
-                var type = isTitle(l) ? 'title' : 'line';
-                return isComment(l)
-                    ? '<div class="doc ' + type + '">' + l + '</div>'
-                    : l;
+                var cls = [];
+                if (isComment(l)) {
+                    cls.push('doc');
+                    cls.push(isTitle(l) ? 'title' : 'line');
+                }
+                return {
+                    cls: cls.join(' '),
+                    content: l,
+                    number: i
+                };
             })
+            .map(template(lineTemplate))
             .toArray();
-    var html =
-        '<pre><div>' +
-            lines.join('</div><div>') +
-        '</div></pre>';
+    var html = '<pre>' + lines.join('') + '</pre>';
     $('#doc').html(html);
 });
 
