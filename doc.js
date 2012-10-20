@@ -61,7 +61,9 @@ $.get('mvw.js', function(raw) {
             .sections
             .map(function(s) {
                 var doc = '<div class="doc">' + s.doc.reduce(renderDocs, '') + '</div>';
-                // TODO: Remove empty trailing lines from code blocks
+                if (s.code[s.code.length - 1].content.length === 0) {
+                    s.code.pop();
+                }
                 var code = '<pre class="code">' + s.code.map(render(codeTemplate)).join('') + '</pre>';
                 return '<div class="section">' + doc + code + '</div>';
             });
