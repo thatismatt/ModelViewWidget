@@ -50,11 +50,26 @@ a {
 
 /* Documentation */
 
+.section {
+    overflow: hidden;
+    font-size: 12px;
+    line-height: 16px;
+    color: #666;
+    padding: 2px 0;
+}
+
+.section:hover {
+    background-color: #eee;
+}
+
 pre {
     font-family: Consolas, "Liberation Mono", Courier, monospace;
-    line-height: 16px;
-    font-size: 12px;
-    color: #666;
+    margin: 0;
+}
+
+.code {
+    width: 400px;
+    float: right;
 }
 
 .code .line {
@@ -62,7 +77,8 @@ pre {
 }
 
 .doc {
-    color: #060;
+    width: 180px;
+    float: left;
 }
 
 .doc .title {

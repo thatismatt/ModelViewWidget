@@ -42,23 +42,20 @@ $.get('mvw.js', function(raw) {
                 };
             })
             .reduce(function(agg, v) {
-                if (agg.isDoc !== v.isDoc) {
-                    var s = [];
-                    s.isDoc = v.isDoc;
+                if (!agg.isDoc && v.isDoc) {
+                    var s = { doc: [], code: [] };
                     agg.sections.push(s)
-                    agg.isDoc = v.isDoc;
                 }
-                agg.sections[agg.sections.length - 1].push(v)
+                agg.sections[agg.sections.length - 1][v.isDoc ? 'doc' : 'code'].push(v)
+                agg.isDoc = v.isDoc;
                 return agg;
             }, { isDoc: false, sections: [] })
             .sections
             .map(function(s) {
                 // TODO: handle doc titles
-                var template = s.isDoc ? docTemplate : codeTemplate;
-                var tag = s.isDoc ? 'div' : 'pre';
-                return '<' + tag + ' class="' + (s.isDoc ? 'doc' : 'code') + '">' +
-                            s.map(render(template)).join('') +
-                       '</' + tag + '>';
+                var doc = '<div class="doc">' + s.doc.map(render(docTemplate)).join('') + '</div>';
+                var code = '<pre class="code">' + s.code.map(render(codeTemplate)).join('') + '</pre>';
+                return '<div class="section">' + doc + code + '</div>';
             });
     $('#doc').html(lines.join(''));
 });
