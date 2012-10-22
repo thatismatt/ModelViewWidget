@@ -22,7 +22,7 @@ function CrossOutableItem(crossedOut, text) {
         }
     });
 
-    self.$el.append($checkbox, editableText.$el, destroy.$el);
+    self.$el.append(destroy.$el, $checkbox, editableText.$el);
 }
 
 function AutoSubmitTextInput() {
