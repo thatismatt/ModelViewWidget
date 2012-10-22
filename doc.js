@@ -42,40 +42,49 @@ function toId(filename) {
     return filename.replace(/\/|\./g, '-');
 }
 
+function parse(raw) {
+    var sections = raw
+        .replace(/\r\n/g,'\n').replace(/\r/g,'\n')
+        .split('\n')
+        .map(function(l, i) {
+            return {
+                content: l.replace(/\</g, '&lt;'),
+                number: i,
+                isDoc: isDocumentation(l),
+                isTitle: isTitle(l)
+            };
+        })
+        .reduce(function(agg, v) {
+            if (agg.isFirst || (!agg.isDoc && v.isDoc)) {
+                agg.isFirst = false;
+                var s = { doc: [], code: [] };
+                agg.sections.push(s)
+            }
+            agg.sections[agg.sections.length - 1][v.isDoc ? 'doc' : 'code'].push(v);
+            agg.isDoc = v.isDoc;
+            return agg;
+        }, { isFirst: true, isDoc: false, sections: [] })
+        .sections;
+    return sections;
+}
+
+function renderSections(sections) {
+    var lines = sections.map(function(s) {
+            var doc = '<div class="doc">' + s.doc.reduce(renderDocs, '') + '</div>';
+            if (s.code[s.code.length - 1].content.trim().length === 0) {
+                s.code.pop();
+            }
+            var code = '<pre class="code">' + s.code.map(render(codeTemplate)).join('') + '</pre>';
+            return '<div class="section">' + doc + code + '</div>';
+        });
+    return lines.join('');
+}
+
 function load(filename) {
     return $
         .get(filename)
-        .then(function(raw) {
-            var lines = raw.split('\n')
-                .map(function(l, i) {
-                    return {
-                        content: l.replace(/\</g, '&lt;'),
-                        number: i,
-                        isDoc: isDocumentation(l),
-                        isTitle: isTitle(l)
-                    };
-                })
-                .reduce(function(agg, v) {
-                    if (agg.isFirst || (!agg.isDoc && v.isDoc)) {
-                        agg.isFirst = false;
-                        var s = { doc: [], code: [] };
-                        agg.sections.push(s)
-                    }
-                    agg.sections[agg.sections.length - 1][v.isDoc ? 'doc' : 'code'].push(v);
-                    agg.isDoc = v.isDoc;
-                    return agg;
-                }, { isFirst: true, isDoc: false, sections: [] })
-                .sections
-                .map(function(s) {
-                    var doc = '<div class="doc">' + s.doc.reduce(renderDocs, '') + '</div>';
-                    if (s.code[s.code.length - 1].content.trim().length === 0) {
-                        s.code.pop();
-                    }
-                    var code = '<pre class="code">' + s.code.map(render(codeTemplate)).join('') + '</pre>';
-                    return '<div class="section">' + doc + code + '</div>';
-                });
-        return lines.join('')
-    });
+        .then(parse)
+        .then(renderSections);
 }
 
 var files = [
