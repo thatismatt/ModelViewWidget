@@ -51,6 +51,9 @@ function EventEmitter(self) {
 }
 
 // # Collection
+// A Collection is a wrapper around an array of items
+// (e.g. Models or Views) that adds extra functionality.
+// (`each()`, `filter()`, `map()`, `count()` and `remove()`)
 function Collection(self) {
     self.each = function(userCallback, callback) {
         for (var i = 0; i < self.items.length; i++) {
@@ -98,6 +101,11 @@ function Collection(self) {
 }
 
 // # Observable
+// An Observable represents a function that wraps a value,
+// you an retrieve the value by invoking the function with
+// no arguments, or you can the value by invoking the function
+// with the new value. `subscribe()` can be used to register
+// a callback that will called with the new value when it changes.
 function Observable(initialValue) {
     var subscriptions = [];
     var observable = function(val) {
@@ -123,27 +131,32 @@ function Observable(initialValue) {
 };
 
 // # Model
+// A model is just an EventEmitter.
 function Model(self) {
     EventEmitter(self);
 }
 
 // # ModelCollection
+// A ModelCollection is a collection of Models.
 function ModelCollection(self) {
     Model(self);
     Collection(self);
 }
 
 // # View
+// There is nothing special about a View.
 function View(self) {
 }
 
 // # ViewCollection
+// A ViewCollection is a collection of Views.
 function ViewCollection(self) {
     View(self);
     Collection(self);
 }
 
 // # Widget
+// A Widget is just an EventEmitter.
 function Widget(self) {
     EventEmitter(self);
 }
