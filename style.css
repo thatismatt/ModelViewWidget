@@ -82,6 +82,7 @@ pre {
 
 .code .line {
     height: 16px;
+    line-height: 16px;
 }
 
 .doc {
