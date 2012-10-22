@@ -111,7 +111,11 @@ files.forEach(function(group) {
                 .appendTo($root);
             $index
                 .find('#' + toId(file) + ' a')
-                .click(function() { $index.hide(); $documentedCode.show(); return false; });
+                .click(function() {
+                    $index.hide();
+                    $documentedCode.show();
+                    return false;
+                });
         });
     });
 });
