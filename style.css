@@ -6,15 +6,11 @@ html, body {
 
 html, body, input, button {
     font-family: Calibri, Arial, sans-serif;
-    font-size: 20px;
+    font-size: 12px;
 }
 
 body {
-    line-height: 40px;
-}
-
-button, input {
-    line-height: 30px;
+    line-height: 20px;
 }
 
 #wrapper {
@@ -26,13 +22,22 @@ button, input {
 }
 
 h1 {
+    font-size: 48px;
+    line-height: 50px;
     text-align: center;
     margin: 0 0 10px 0;
 }
 
+h2, h3 {
+    margin: 10px 0 5px 0;
+}
+
 h2 {
     font-size: 20px;
-    margin: 10px 0 5px 0;
+}
+
+h3 {
+    font-size: 18px;
 }
 
 p {
@@ -48,12 +53,15 @@ a {
     cursor: pointer;
 }
 
+ul {
+    margin: 0;
+}
+
 /* Documentation */
 
 .section {
     overflow: hidden;
     font-size: 12px;
-    line-height: 16px;
     color: #666;
     padding: 2px 0;
 }

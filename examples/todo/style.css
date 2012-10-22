@@ -6,6 +6,11 @@
     border-bottom: 1px solid #ccc;
 }
 
+.todo-item, #create input {
+    line-height: 40px;
+    font-size: 20px;
+}
+
 .crossed-out a {
     text-decoration: line-through;
     color: #999;
@@ -26,6 +31,10 @@
     background-position: 0 -20px;
 }
 
+#stats {
+    margin-top: 5px;
+}
+
 #create input {
     width: 380px;
     border: 1px solid #CCCCCC;
@@ -33,25 +42,8 @@
     padding: 5px;
 }
 
-.small {
-    font-size: 80%;
-}
-
-.small button {
-    line-height: 20px;
-    font-size: 80%;
-}
-
 #total-completed {
     float: right;
     color: #999;
-}
-
-#notes {
-    line-height: 20px;
-}
-
-#notes ul {
-    margin: 0;
 }
 
