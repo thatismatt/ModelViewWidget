@@ -18,7 +18,7 @@ button, input {
 }
 
 #wrapper {
-    width: 600px;
+    width: 800px;
     margin: 0 auto;
     padding: 25px;
     background-color: #fff;
@@ -68,7 +68,7 @@ pre {
 }
 
 .code {
-    width: 400px;
+    width: 600px;
     float: right;
 }
 
