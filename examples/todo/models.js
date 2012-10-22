@@ -48,7 +48,7 @@ function TodoItems(items) {
     self.bind('item-done', updateTotalCompleted);
 
     (function initialise() {
-        items.map(self.add);
+        items.forEach(self.add);
     })();
 }
 
