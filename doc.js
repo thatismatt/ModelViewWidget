@@ -105,8 +105,17 @@ var $index = $('<div>')
 files.forEach(function(group) {
     group.files.forEach(function(file) {
         load(file).then(function(html) {
+            var $title = $('<h3>' + file + '</h3>');
+            var $nav = $('<div><a href="#">&lt; back</a></div>');
+            $nav.find('a').click(function() {
+                    $documentedCode.hide();
+                    $index.show();
+                    return false;
+            });
             var $documentedCode = $('<div>')
-                .html(html)
+                .append($nav)
+                .append($title)
+                .append(html)
                 .hide()
                 .appendTo($root);
             $index
