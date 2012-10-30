@@ -15,7 +15,7 @@ mvw.config.debug = true;
 
 // A log function that obeys the config debug setting
 mvw.log = function() {
-    if (mvw.config.debug && console && console.log) {
+    if (mvw.config.debug && window.console && window.console.log) {
         if (console.log.apply) {
             console.log.apply(console, arguments);
         } else {
