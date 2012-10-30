@@ -6,9 +6,16 @@
     border-bottom: 1px solid #ccc;
 }
 
+.todo-item, .todo-item input, #create input {
+    font-size: 20px;
+}
+
 .todo-item, #create input {
     line-height: 40px;
-    font-size: 20px;
+}
+
+.todo-item input {
+    line-height: 20px;
 }
 
 .crossed-out a {
@@ -46,4 +53,3 @@
     float: right;
     color: #999;
 }
-
